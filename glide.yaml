@@ -1,0 +1,9 @@
+package: untitled3
+import:
+- package: github.com/Sirupsen/logrus
+- package: github.com/gin-gonic/gin
+- package: github.com/go-redis/redis
+- package: github.com/jinzhu/gorm
+  subpackages:
+  - dialects/postgres
+- package: github.com/spf13/viper
