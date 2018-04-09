@@ -11,17 +11,19 @@ type RedisConfig interface {
 }
 
 type redis struct {
-    address  string
-    password string
-    db       int
+    address     string
+    testArrdess string
+    password    string
+    db          int
 }
 
 func loadRedis() redis{
     s := viper.Sub("redis")
     return redis{
-        address:  s.GetString("address"),
-        db:       s.GetInt("db"),
-        password: s.GetString("password"),
+        address:     s.GetString("address"),
+        testArrdess: s.GetString("test_address"),
+        db:          s.GetInt("db"),
+        password:    s.GetString("password"),
     }
 }
 
@@ -35,4 +37,8 @@ func (r redis)Password() string{
 
 func (r redis)Db() int{
     return r.db
+}
+
+func (r redis)TestAddress() string {
+    return r.testArrdess
 }

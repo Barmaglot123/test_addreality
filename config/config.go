@@ -9,6 +9,8 @@ func Load() {
     viper.SetConfigName("config")
     viper.SetConfigType("json")
     viper.AddConfigPath("./resources/config")
+    viper.AddConfigPath("../resources/config")
+
     if err := viper.ReadInConfig(); err != nil {
         log.Fatal(err)
     }

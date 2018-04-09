@@ -39,4 +39,7 @@ CREATE TABLE device_alerts (
   message TEXT
 );
 
+insert into users (id, name, email) values (1, 'Test User', 'mcdia@bk.ru');
+insert into devices (id, name, user_id) values (1, 'Test Device', 1);
+
 END;

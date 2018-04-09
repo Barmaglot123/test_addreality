@@ -16,6 +16,10 @@ func SetupSql() {
     migrate()
 }
 
+func SetupTestSql() error {
+     return connectToTest()
+}
+
 const (
     NO_VERSION 	= 0
 )
@@ -28,9 +32,27 @@ func connect() {
             " user="     + config.Sql.User() +
             " password=" + config.Sql.Password() +
             " sslmode="  + config.Sql.SSL())
+
     if err != nil {
         log.Fatal(err)
     }
+}
+
+func connectToTest() error {
+    var err error
+    Sql, err = gorm.Open("postgres",
+        " host=" + config.Sql.Host() +
+            " dbname="   + config.Sql.Name() +
+            " user="     + config.Sql.User() +
+            " port=9668" +
+            " password=" + config.Sql.Password() +
+            " sslmode="  + config.Sql.SSL())
+
+    if err != nil {
+        return err
+    }
+    return nil
+
 }
 
 func migrate() {

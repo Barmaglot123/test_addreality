@@ -8,6 +8,7 @@
   },
   "redis": {
     "address": "localhost:6379",
+    "test_address": "localhost:9667",
     "password": "",
     "db": 0
   },

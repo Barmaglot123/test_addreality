@@ -16,6 +16,7 @@ var Sql sql
 
 type sql struct {
     host		string
+    testHost    string
     name		string
     user		string
     password	string
@@ -26,6 +27,7 @@ func loadSql() sql {
     s := viper.Sub("sql")
     return sql{
         host: 		s.GetString("host"),
+        testHost:   s.GetString("test_host"),
         name: 		s.GetString("name"),
         password: 	s.GetString("password"),
         user: 		s.GetString("user"),
@@ -36,6 +38,10 @@ func loadSql() sql {
 
 func(s sql) Host() string {
     return s.host
+}
+
+func(s sql) TestHost() string {
+    return s.testHost
 }
 
 func(s sql) Name() string {
