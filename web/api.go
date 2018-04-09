@@ -19,6 +19,16 @@ func Run() {
     r.Run(":9669")
 }
 
+func NewServer() *gin.Engine {
+    r := gin.Default()
+
+    metricCon := metricController()
+
+    r.POST("/metric", binders.Metric, metricCon.Create)
+
+    return r
+}
+
 func metricController() controllers.Metric {
     factory := repositories.NewTransactionFactory(datasource.Sql)
     repo := repositories.NewMetric()
