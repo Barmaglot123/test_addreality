@@ -1,0 +1,26 @@
+{
+  "sql": {
+    "host": "localhost",
+    "test_host": "localhost:9668",
+    "name": "test_task",
+    "user": "test_user",
+    "password": "rUeIZVWr",
+    "ssl": "disable"
+  },
+  "redis": {
+    "address": "localhost:6379",
+    "test_address": "localhost:9667",
+    "password": "",
+    "db": 0
+  },
+  "metric": {
+    "min_lim": 5,
+    "max_lim": 10
+  },
+  "smtp": {
+    "username": "test1task1mail@gmail.com",
+    "password": "TestTask123" ,
+    "host": "smtp.gmail.com",
+    "port": 587
+  }
+}

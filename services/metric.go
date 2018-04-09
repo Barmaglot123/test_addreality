@@ -69,7 +69,7 @@ func (m metric)Create(metric *model.DeviceMetric) {
     }
 
     if sendMail {
-        go m.sendAlertMail(mailBody, metric.DeviceID)
+        m.sendAlertMail(mailBody, metric.DeviceID)
     }
 
     tx := m.txFactory.BeginNewTransaction()
@@ -85,7 +85,7 @@ func setAlertToRedis(deviceID int, fieldName string){
 
 func (m metric) sendAlertMail(b string, deviceID int) {
     tx := m.txFactory.BeginNewTransaction()
-    defer tx.Commit()
     d := m.deviceRepo.First(tx, deviceID)
+    tx.Commit()
     utils.SendEmail(d.User.Email, b)
 }

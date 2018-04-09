@@ -6,6 +6,7 @@ import (
     "strconv"
     "regexp"
     "github.com/Sirupsen/logrus"
+    "os"
 )
 
 var sqlScriptRegexp = regexp.MustCompile(`(\d+?)_.+`)
@@ -21,7 +22,20 @@ func SqlScript(version string) string {
 }
 
 func SqlScriptMaxVersion() int {
-    dir, err := ioutil.ReadDir("./resources/sql/")
+    var dir []os.FileInfo
+    var e bool = true
+    var err error
+    dir, err = ioutil.ReadDir("./resources/sql/")
+
+    if err != nil {
+        e = false
+        err = nil
+    }
+
+    if !e {
+        dir, err = ioutil.ReadDir("../resources/sql/")
+    }
+
     if err != nil {
         logrus.Fatal(err)
     }
@@ -40,10 +54,26 @@ func SqlScriptMaxVersion() int {
 }
 
 func findMigrationFileNameByVersion(version string) string {
-    var salScriptFindRegexp = regexp.MustCompile(`0*?` + version + `_.+?\.sql`)
-    parentFolder := "./resources/sql/"
+    var dir []os.FileInfo
+    var e bool = true
+    var err error
+    var parentFolder string
 
-    dir, err := ioutil.ReadDir(parentFolder)
+    var salScriptFindRegexp = regexp.MustCompile(`0*?` + version + `_.+?\.sql`)
+    parentFolder = "./resources/sql/"
+
+    dir, err = ioutil.ReadDir("./resources/sql/")
+
+    if err != nil {
+        e = false
+        err = nil
+        parentFolder = "../resources/sql/"
+    }
+
+    if !e {
+        dir, err = ioutil.ReadDir(parentFolder)
+    }
+
     if err != nil {
         logrus.Fatal(err)
     }
